@@ -80,8 +80,5 @@ public class Server {
 
 
     }
-    static void mostrarTabla(char [][] taula){
-        
 
-    }
 }
