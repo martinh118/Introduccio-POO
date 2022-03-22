@@ -17,7 +17,7 @@ public class Client_1 {
         ObjectInputStream in;
         ObjectOutputStream out;
 
-        Missatge m1 = new Missatge(1);
+        Missatge m1 = new Missatge("");
 
         try {
             //Creo el socket para conectarme con el servidor

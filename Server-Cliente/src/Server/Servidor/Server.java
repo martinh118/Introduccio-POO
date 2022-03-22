@@ -43,7 +43,7 @@ public class Server {
 
         try {
             //Estara escuchando hasta que se conecte un segundo cliente
-            while (s1 != Server.accept()) {
+            while (true) {
                 //Espero a que un cliente se conecte
                 s1 = Server.accept();
                 //Obtener datos enviados por el cliente
@@ -53,15 +53,6 @@ public class Server {
                 out1.writeObject("Esperando a otro jugador...");
             }
 
-            while (s2 != Server.accept()) {
-                s2 = Server.accept();
-                //Obtener datos enviados por el cliente
-                in2 = new ObjectInputStream(new BufferedInputStream(s2.getInputStream()));
-                out2 = new ObjectOutputStream(s2.getOutputStream());
-                System.out.println("Jugador 2 conectado");
-                out2.writeObject("2 jugadores conectados.");
-
-            }
 
         } catch (IOException e) {
             e.printStackTrace();
