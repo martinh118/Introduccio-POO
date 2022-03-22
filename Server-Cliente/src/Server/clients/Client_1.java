@@ -1,6 +1,8 @@
 package Server.clients;
 
 import Server.model.Missatge;
+import Server.model.Numero;
+import java.util.Scanner;
 
 import java.io.*;
 import java.net.Socket;
@@ -8,31 +10,44 @@ import java.net.UnknownHostException;
 
 public class Client_1 {
 
-    public static void main(String[] args) {
+    static Scanner scan = new Scanner(System.in);
 
-        //Host del servidor
-        final String HOST = "10.94.254.12";
-        //Puerto del servidor
-        final int PUERTO = 5000;
-        ObjectInputStream in;
-        ObjectOutputStream out;
+    //Host del servidor
+    final static String HOST = "10.94.254.12";
+    //Puerto del servidor
+    final static int PUERTO = 5000;
+    static ObjectInputStream in;
+    static ObjectOutputStream out;
 
-        Missatge m1 = new Missatge(1);
+    public static void main(String[] args) throws IOException{
 
+
+        conexionServer();
+        while(true){
+            movimiento();
+        }
+
+
+
+
+    }
+
+
+    static void conexionServer(){
         try {
             //Creo el socket para conectarme con el servidor
             Socket sc = new Socket(HOST, PUERTO);
 
-            //Envio un mensaje al cliente
+            //Envío un mensaje al cliente
             out = new ObjectOutputStream(sc.getOutputStream());
-            out.writeObject(m1);
 
             //Recibo el mensaje del servidor
             in = new ObjectInputStream(new BufferedInputStream(sc.getInputStream()));
+
             Missatge mensServer = (Missatge)in.readObject();
             System.out.println(mensServer.getTexto());
 
-            sc.close();
+
 
         } catch (UnknownHostException e) {
             e.printStackTrace();
@@ -41,6 +56,20 @@ public class Client_1 {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    static void movimiento() throws IOException {
+        try{
+            Missatge mensServer = (Missatge)in.readObject();
+            System.out.println(mensServer.getTexto());
+
+            int num = scan.nextInt();
+            Numero movimiento = new Numero(num);
+            out.writeObject(movimiento);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
 
     }
+
 }

@@ -4,22 +4,21 @@ import java.io.Serializable;
 
 public class Missatge implements Serializable {
 
-    int linea;
+    String texto;
 
 
     //Constructor
-    public Missatge(int _linea){
-        linea = _linea;
-
+    public Missatge(String _texto){
+        texto = _texto;
     }
 
     //Setter
-    public void setMissatge(int _linea){
-        linea = _linea;
+    public void setMissatge(String _texto){
+        texto = _texto;
 
     }
 
     //Getter
-    public int getTexto(){return linea;}
+    public String getTexto(){return texto;}
 
 }
